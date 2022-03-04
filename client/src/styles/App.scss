@@ -1,0 +1,128 @@
+$light-brown : #E3C170; //#b4e4bc;
+$dark-brown : #b88b4a; //#74a4a4;
+$light-green : #476C37;
+$dark-green : #355129;
+$black : #000000;
+$beige : #EEDAAA;//#EBEBEB;
+$off-white : #F7F7F7;
+$white : #ffffff;
+$success-bg : rgba(92, 184, 92, 0.5);
+$success-txt : #255525;
+$error-bg : rgba(217, 83, 79, 0.5);
+$error-txt : #641916;
+$backdrop-color : rbga(255, 255, 255, 0.9);
+
+$phone-breakpoint : 640px;
+$tablet-breakpoint : 768px;
+$desktop-breakpoint : 1024px;
+
+
+
+*{
+    box-sizing: border-box;
+}
+
+.app {
+    height: 99.99vh;
+    display: flex;
+}
+
+
+.button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    text-transform: capitalize;
+    margin-bottom: 1em;
+    cursor: pointer;
+}
+
+
+.promote-pieces {
+    display: flex;
+    margin-bottom: 1em;
+    cursor: pointer;
+
+    &-piece {
+        &-title {
+            text-transform: capitalize;
+
+            &.selected {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.flex-column-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.board-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media (min-width : $desktop-breakpoint) {
+
+    .button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        text-transform: capitalize;
+        margin-bottom: 1em;
+        cursor: pointer;
+    }
+    
+    
+    .promote-pieces {
+        display: flex;
+        margin-bottom: 1em;
+        cursor: pointer;
+    
+        &-piece {
+            &-title {
+                text-transform: capitalize;
+    
+                &.selected {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    
+    .flex-column-container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    
+    .board-section {
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .directory-section {
+        min-width: 300px;
+        width: 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }    
+
+}
+
+
+@import 'Board';
+@import 'Player';
+@import 'Login';
+@import 'UI';
+@import 'SidePanel';
+
+
+

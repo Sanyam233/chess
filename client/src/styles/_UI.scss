@@ -1,0 +1,142 @@
+.backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: $black;
+  opacity: 0.5;
+}
+
+.modal {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  background-color: $white;
+  padding: 1em 1.5em;
+  border-radius: 7px;
+  margin-top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 80%;
+  max-width: 500px;
+
+  &-heading {
+    margin-bottom: 0.5em;
+  }
+
+  &-para {
+    line-height: 1.2em;
+  }
+}
+
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 40px;
+  align-self: center;
+
+  div {
+    position: absolute;
+    top: 1.5em;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: black;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  } 
+  
+  div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+  }
+
+  div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+
+  div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+
+  div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+
+}
+
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+.invitation-link {
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+
+.alert {
+  height : 60px;
+  width: 90%;
+  max-width: 786px;
+  margin: 1em auto;
+  border-radius: 5px;
+  padding : 0.5em 1em;
+  display : flex;
+  justify-content : space-between;
+  align-items : center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+}
+
+.success {
+  background-color : $success-bg;
+  color : $success-txt;
+}
+
+.error {
+  background-color : $error-bg;
+  color : $error-txt;
+}
+
+.dismiss-button {
+  border: none;
+  background-color: transparent;
+  font-size : 0.9rem;
+  cursor : pointer;
+  color : inherit;
+}
