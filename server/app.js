@@ -7,6 +7,7 @@ const gamePlayers = new Map();
 
 const app = express();
 const server = http.createServer(app);
+
 const io = socketio(server, {
   cors: {
     origin: "http://localhost:3000",
@@ -55,9 +56,8 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("update_board", ( { updatedBoard ,gameID, obj, to }) => {
-    console.log(obj);
-    socket.broadcast.to(gameID).emit("update_opponent_board", { updatedBoard, to, newobj : obj });
+  socket.on("update_board", ( { gameID, from, to }) => {
+    socket.broadcast.to(gameID).emit("update_opponent_board", { from, to });
   })
 
   socket.on("game_over", ( { winner, gameID } ) => {
@@ -72,6 +72,14 @@ io.on("connection", (socket) => {
 
   socket.on("update_moves", ( {gameID, moves } ) => {
     socket.broadcast.to(gameID).emit("update_moves", { moves });
+  })  
+
+  socket.on("promote_pawn", ({ gameID, to, pieceType }) => {
+    socket.broadcast.to(gameID).emit("promote_pawn", { to, pieceType });
+  })
+
+  socket.on("pawn_promotion_alert", ({ gameID }) => {
+    socket.broadcast.to(gameID).emit("pawn_promotion_alert");
   })  
 
 });

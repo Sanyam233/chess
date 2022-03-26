@@ -9,7 +9,7 @@ const Square = (props) => {
   const moves = () => {
 
     if (props.piece) {
-      props.getMoves(props.piece.type, props.pos);
+      props.getMoves(props.pos);
     }
 
     if (props.isPotential) {

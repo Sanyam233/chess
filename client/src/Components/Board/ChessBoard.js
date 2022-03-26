@@ -29,7 +29,7 @@ const ChessBoard = (props) => {
       );
     }
 
-    Board.push(<div className="board-row">{row}</div>);
+    Board.push(row);
   }
   
   return (

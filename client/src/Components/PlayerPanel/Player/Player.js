@@ -1,4 +1,4 @@
-import Piece from "../Piece/Piece";
+import Piece from "../../Piece/Piece";
 
 const Player = (props) => {
     

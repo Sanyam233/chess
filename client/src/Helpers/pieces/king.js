@@ -4,7 +4,7 @@ import Piece from './piece';
 export default class King extends Piece {
 
     constructor(player, location) {
-        super(player, location, "chess-king");
+        super(player, location, "chess-king", "king");
     }
 
     canCastle = (board, from, to) => {
@@ -24,7 +24,8 @@ export default class King extends Piece {
         return board[from[0]][rookYLoc].type === "rook";
     }
       
-    moves = (board, indexes) => {
+    moves = (board) => {
+      const potentialMoves = [];
         for (let i = -1; i < 2; i++) {
           for (let j = -1; j < 2; j++) {
             const r = this.location[0] + i;
@@ -36,19 +37,21 @@ export default class King extends Piece {
               c < 8 &&
               (board[r][c] === null || board[r][c].player !== this.player)
             ) {
-              indexes.push([r, c]);
+              potentialMoves.push([r, c]);
             }
           }
         }
       
         //castling
-        if (canCastle(board, pos, [pos[0], 6])) {
-          indexes.push([pos[0], 6]);
+        if (this.canCastle(board, this.location, [this.location[0], 6])) {
+          potentialMoves.push([this.location[0], 6]);
         }
       
-        if (canCastle(board, pos, [pos[0], 2])) {
-          indexes.push([pos[0], 2]);
+        if (this.canCastle(board, this.location, [this.location[0], 2])) {
+          potentialMoves.push([this.location[0], 2]);
         }
+      
+        return potentialMoves;
     }
       
 }

@@ -22,7 +22,7 @@ const Promote = (props) => {
           </div>
         ))}
       </div>
-      <button className="button" onClick = {() => props.onPromote(props.pieces[pieceIdx])}>Pick {props.pieces[pieceIdx].type}</button>
+      <button className="button" onClick = {() => props.onPromote(props.pieces[pieceIdx])}>Pick</button>
     </Modal>
   );
 };

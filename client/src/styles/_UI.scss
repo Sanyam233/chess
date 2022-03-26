@@ -1,5 +1,6 @@
 .backdrop {
   position: fixed;
+  z-index: 2;
   left: 0;
   top: 0;
   right: 0;
@@ -71,6 +72,39 @@
   }
 
 }
+
+
+
+.button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  text-transform: capitalize;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+
+
+.promote-pieces {
+  display: flex;
+  margin-bottom: 1em;
+  cursor: pointer;
+
+  &-piece {
+      &-title {
+          text-transform: capitalize;
+
+          &.selected {
+              font-weight: bold;
+          }
+      }
+  }
+}
+
+.flex-column-container {
+  display: flex;
+  flex-direction: column;
+}
+
 
 @keyframes lds-ellipsis1 {
   0% {

@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
 
 import Board from "../Board/BoardLogic";
-import MoveDirectory from "../MoveDirectory/MoveDirectory";
 import Invitation from "../Modals/Invitation";
+import PlayerPanel from "../PlayerPanel/PlayerPanel"
+import SidePanel from "../SidePanel/SidePanel";
+
+import useWindowDimensions from "../../Hooks/useWindowDimensions";
 import { useUser } from "../../Context/UserProvider";
 import { useGame } from "../../Context/GameProvider";
 import { useSocket } from "../../Context/SocketProvider";
+import { TABLET_BREAKPOINT } from "../../Helpers/CONSTVARIABLES";
 
 const Game = () => {
   const { hasJoined, setHasTurn, setPlayers, setPlayer } = useUser();
   const { setGameStarted, gameStarted, gameID, recordedMoves, setRecordedMoves }  = useGame();
   const { socket } = useSocket();
+  const { height, width } = useWindowDimensions();
+  const isMobile = width < TABLET_BREAKPOINT;
+
 
   const recordMove = (notation, player)  => {
     const moves = recordedMoves.map((moves) => [...moves]);
@@ -45,15 +52,18 @@ const Game = () => {
   }, [socket, setPlayers, setPlayer, setHasTurn, setGameStarted]);
 
   return (
-    <React.Fragment>
+    <div className = "game-container">
       {hasJoined && !gameStarted && <Invitation />}
-      <section className = "board-section">
-          <Board recordMoves = {recordMove}/>
+      <section className = "chess-board-section">
+        {isMobile && <PlayerPanel>
+            <Board recordMoves = {recordMove}/>
+        </PlayerPanel>}
+        {!isMobile && <Board recordMoves = {recordMove}/>}
       </section>
-      <section className = "directory-section">
-          <MoveDirectory />
-      </section>
-    </React.Fragment>
+      { !isMobile && <section className = "side-panel-section">
+        <SidePanel/>
+      </section>}
+    </div>
   );
 };
 

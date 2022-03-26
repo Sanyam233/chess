@@ -17,109 +17,55 @@ $tablet-breakpoint : 768px;
 $desktop-breakpoint : 1024px;
 
 
-
-*{
+* {
     box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
 }
 
 .app {
     height: 99.99vh;
-    display: flex;
+}
+
+.app-container {
+    display: grid;
+    place-items: center;
+    height: 100%;
+}
+
+.game-container {
+    height: 100%;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
 }
 
 
-.button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    text-transform: capitalize;
-    margin-bottom: 1em;
-    cursor: pointer;
+.chess-board-section {
+    display: grid;
+    place-items: center;
+    height: 100%;
 }
 
+.side-panel-section {
+    height: 100%;
+}    
 
-.promote-pieces {
-    display: flex;
-    margin-bottom: 1em;
-    cursor: pointer;
+@media (min-width : $tablet-breakpoint) {
 
-    &-piece {
-        &-title {
-            text-transform: capitalize;
-
-            &.selected {
-                font-weight: bold;
-            }
-        }
+    .game-container {
+        width: 90%;
+        grid-template-columns: repeat(2, auto);
+        column-gap: 5vw;     
     }
-}
-
-.flex-column-container {
-    display: flex;
-    flex-direction: column;
-}
-
-
-.board-section {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-@media (min-width : $desktop-breakpoint) {
-
-    .button {
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        text-transform: capitalize;
-        margin-bottom: 1em;
-        cursor: pointer;
-    }
-    
-    
-    .promote-pieces {
-        display: flex;
-        margin-bottom: 1em;
-        cursor: pointer;
-    
-        &-piece {
-            &-title {
-                text-transform: capitalize;
-    
-                &.selected {
-                    font-weight: bold;
-                }
-            }
-        }
-    }
-    
-    .flex-column-container {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    
-    .board-section {
-        width: 60%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .directory-section {
-        min-width: 300px;
-        width: 25%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }    
 
 }
 
 
 @import 'Board';
-@import 'Player';
+@import 'PlayerPanel';
 @import 'Login';
 @import 'UI';
 @import 'SidePanel';

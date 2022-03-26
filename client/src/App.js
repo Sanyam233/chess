@@ -10,17 +10,19 @@ function App() {
 
   return (
     <main className="app">
-      <Switch>
-        {hasJoined && (
-          <Route exact path="/:roomID">
-            <Game />
+      <div className = "app-container">
+        <Switch>
+          {hasJoined && (
+            <Route exact path="/:roomID">
+              <Game />
+            </Route>
+          )}
+          <Route path="/">
+            <Login />
           </Route>
-        )}
-        <Route path="/">
-          <Login />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
+          <Redirect to="/" />
+        </Switch>
+      </div>
     </main>
   );
 }

@@ -1,0 +1,31 @@
+.player-panel {
+    width : 100%;
+}
+
+.player {
+    display: flex;
+    width: 100%;
+    padding : 0.75em;
+    background-color: $dark-green;
+
+    &-image {
+        height: clamp(50px, 5vw, 90px);
+        width : clamp(50px, 5vw, 90px);
+        background-color: $white;
+        margin-right: 0.75em;
+    }
+
+    &-name {
+        color : $white;
+        text-transform: capitalize;
+        font-weight: bold;
+        font-size: clamp(1rem, 1vw, 1.5rem);
+    }
+}
+
+.fallen-pieces {
+    margin-top: clamp(0.04em, 1vw, 0.6em);
+    margin-left: 0.25em;
+    line-height: 1.1rem;
+    font-size: clamp(0.6rem, 1vw, 1rem);
+}
