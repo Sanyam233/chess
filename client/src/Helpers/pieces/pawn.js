@@ -1,43 +1,65 @@
-import Piece from "./piece";
+import Piece from './Piece';
+import Position from '../Position';
 
-export default class Pawn extends Piece {
-  constructor(player, location) {
-    super(player, location, "chess-pawn", "pawn");
+class Pawn extends Piece {
+  constructor(isWhite, pos) {
+    super(isWhite, pos, 'chess-pawn');
+    this.hasMoved = false;
   }
 
-  moves = (board) => {
-    console.log(this.location);
-    const potentialMoves = [];
-    let d = this.player === 0 ? 1 : -1;
-    let row = this.player === 0 ? 1 : 6;
+  getMoves(board) {
+    const DIRECTIONS = [[1, 0]];
+    const DIRECTIONS_INITIAL = [
+      [1, 0],
+      [2, 0],
+    ];
+    const THREATEN_MOVES = [
+      [1, -1],
+      [1, 1],
+    ];
+    const moves = [];
 
-    if (board[this.location[0] + d][this.location[1]] === null) {
-      potentialMoves.push([this.location[0] + d, this.location[1]]);
+    const potentialMoves = this.hasMoved ? DIRECTIONS : DIRECTIONS_INITIAL;
 
-      if (
-        this.location[0] === row &&
-        board[this.location[0] + 2 * d][this.location[1]] === null
-      ) {
-        potentialMoves.push([this.location[0] + 2 * d, this.location[1]]);
-      }
+    for (const move of potentialMoves) {
+      const incrementX = this.isWhite ? move[0] : -move[0],
+        incrementY = move[1];
+      const isPossible = super.checkMove(
+        board,
+        incrementX,
+        incrementY,
+        false,
+        true
+      );
+      if (isPossible)
+        moves.push(
+          new Position(this.pos.x + incrementX, this.pos.y + incrementY)
+        );
     }
 
-    if (
-      board[this.location[0] + d][this.location[1] - 1] &&
-      board[this.location[0] + d][this.location[1] - 1].player != this.player
-    ) {
-      potentialMoves.push([this.location[0] + d, this.location[1] - 1]);
+    for (const move of THREATEN_MOVES) {
+      const incrementX = this.isWhite ? move[0] : -move[0],
+        incrementY = move[1];
+      const isPossible = super.checkMove(
+        board,
+        incrementX,
+        incrementY,
+        true,
+        true
+      );
+      if (isPossible)
+        moves.push(
+          new Position(this.pos.x + incrementX, this.pos.y + incrementY)
+        );
     }
 
-    if (
-      board[this.location[0] + d][this.location[1] + 1] &&
-      board[this.location[0] + d][this.location[1] + 1] != this.player
-    ) {
-      potentialMoves.push([this.location[0] + d, this.location[1] + 1]);
-    }
+    return moves;
+  }
 
-    return potentialMoves;
-  };
-
-
+  move(pos) {
+    this.hasMoved = true;
+    super.move(pos);
+  }
 }
+
+export default Pawn;

@@ -1,9 +1,9 @@
-import Pawn from './newPieces/Pawn';
-import Queen from './newPieces/Queen';
-import King from './newPieces/King';
-import Rook from './newPieces/Rook';
-import Knight from './newPieces/Knight';
-import Bishop from './newPieces/Bishop';
+import Pawn from './pieces/Pawn';
+import Queen from './pieces/Queen';
+import King from './pieces/King';
+import Rook from './pieces/Rook';
+import Knight from './pieces/Knight';
+import Bishop from './pieces/Bishop';
 
 class PieceType {
   static ROOK = 'rook';
@@ -52,8 +52,4 @@ class PieceFactory {
   }
 }
 
-module.exports = {
-  PieceType,
-  PIECES,
-  PieceFactory,
-};
+export { PieceType, PIECES, PieceFactory };

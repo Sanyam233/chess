@@ -1,57 +1,38 @@
-import Piece from './piece';
+import Piece from './Piece';
+import Position from '../Position';
 
+class King extends Piece {
+  constructor(isWhite, pos) {
+    super(isWhite, pos, 'chess-king');
+    this.hasCastled = false;
+  }
 
-export default class King extends Piece {
+  getMoves(board) {
+    const DIRECTIONS = [
+      [1, 0],
+      [0, 1],
+      [-1, 0],
+      [0, -1],
+      [1, -1],
+      [1, 1],
+      [-1, 1],
+      [-1, -1],
+    ];
 
-    constructor(player, location) {
-        super(player, location, "chess-king", "king");
+    const moves = [];
+
+    for (const move of DIRECTIONS) {
+      const incrementX = this.isWhite ? move[0] : -move[0],
+        incrementY = move[1];
+      const isPossible = super.checkMove(board, incrementX, incrementY, true);
+      if (isPossible)
+        moves.push(
+          new Position(this.pos.x + incrementX, this.pos.y + incrementY)
+        );
     }
 
-    canCastle = (board, from, to) => {
-        const xMoves = from[1] - to[1];
-        const yMoves = from[0] - to[0];
-        let dx = 1;
-      
-        if (Math.abs(xMoves) !== 2 || yMoves !== 0) return false;
-        if (from[1] > to[1]) dx = -1;
-      
-        for (let step = 1; step < 3; step++) {
-          if (board[from[0]][from[1] + step * dx] !== null) return false;
-        }
-      
-        const rookYLoc = dx === 1 ? 7 : 0;
-      
-        return board[from[0]][rookYLoc].type === "rook";
-    }
-      
-    moves = (board) => {
-      const potentialMoves = [];
-        for (let i = -1; i < 2; i++) {
-          for (let j = -1; j < 2; j++) {
-            const r = this.location[0] + i;
-            const c = this.location[1] + j;
-            if (
-              r >= 0 &&
-              c >= 0 &&
-              r < 8 &&
-              c < 8 &&
-              (board[r][c] === null || board[r][c].player !== this.player)
-            ) {
-              potentialMoves.push([r, c]);
-            }
-          }
-        }
-      
-        //castling
-        if (this.canCastle(board, this.location, [this.location[0], 6])) {
-          potentialMoves.push([this.location[0], 6]);
-        }
-      
-        if (this.canCastle(board, this.location, [this.location[0], 2])) {
-          potentialMoves.push([this.location[0], 2]);
-        }
-      
-        return potentialMoves;
-    }
-      
+    return moves;
+  }
 }
+
+export default King;

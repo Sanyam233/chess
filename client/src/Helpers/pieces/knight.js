@@ -1,30 +1,37 @@
-import Piece from "./piece";
+import Piece from './Piece';
+import Position from '../Position';
 
-export default class Knight extends Piece {
-  constructor(player, location) {
-    super(player, location, "chess-knight", "knight");
+class Knight extends Piece {
+  constructor(isWhite, pos) {
+    super(isWhite, pos, 'chess-knight');
   }
 
-  moves = (board) => {
-    const potentialMoves = [];
-    for (let i = -2; i < 3; i++) {
-      for (let j = -2; j < 3; j++) {
-        if (Math.pow(i, 2) + Math.pow(j, 2) === 5) {
-          const r = this.location[0] + i;
-          const c = this.location[1] + j;
-          if (
-            r >= 0 &&
-            c >= 0 &&
-            r < 8 &&
-            c < 8 &&
-            (board[r][c] === null || board[r][c].player !== this.player)
-          ) {
-            potentialMoves.push([r, c]);
-          }
-        }
-      }
+  getMoves(board) {
+    const DIRECTIONS = [
+      [2, 1],
+      [2, -1],
+      [1, 2],
+      [-1, 2],
+      [-2, 1],
+      [-2, -1],
+      [1, -2],
+      [-1, -2],
+    ];
+
+    const moves = [];
+
+    for (const move of DIRECTIONS) {
+      const incrementX = this.isWhite ? move[0] : -move[0],
+        incrementY = move[1];
+      const isPossible = super.checkMove(board, incrementX, incrementY, true);
+      if (isPossible)
+        moves.push(
+          new Position(this.pos.x + incrementX, this.pos.y + incrementY)
+        );
     }
 
-    return potentialMoves;
-  };
+    return moves;
+  }
 }
+
+export default Knight;
